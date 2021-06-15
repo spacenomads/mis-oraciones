@@ -7,7 +7,7 @@ import { TodoContext } from '../../context/TodoContext';
 function TodoList() {
   const { tasks } = useContext(TodoContext);
   const createTasks = todo => {
-    const { id, label, completed } = todo;
+    const { id, label, completed, completion_date} = todo;
     const taskId = `task-${id}`;
 
     return (
@@ -16,7 +16,8 @@ function TodoList() {
           label={label}
           id={id}
           taskId={taskId}
-          checked={completed}
+          completed={completed}
+          completionDate={completion_date}
         />
       </li>
     );

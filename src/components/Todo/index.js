@@ -1,9 +1,11 @@
 import { useContext } from "react";
 import { TodoContext } from "../../context/TodoContext";
+import { getDaysAgo } from "../../helpers/dates";
+import './index.scss';
 
 function Todo(props) {
   const {saveTasks} = useContext(TodoContext);
-  const { label, taskId, id, completed} = props;
+  const { label, taskId, id, completed, completionDate} = props;
 
   const updateTasks = event => {
     const field = event.target;
@@ -21,11 +23,14 @@ function Todo(props) {
       }
       return newTasks
     });
+  }
 
+  const getCompletionDate = () => {
+    return completed ? `@${getDaysAgo(completionDate)}`:'';
   }
 
   return (
-    <div className="task">
+    <div className={`task ${completed ? 'task--completed':''}`}>
       <input
         className="task__field"
         type="checkbox"
@@ -35,7 +40,7 @@ function Todo(props) {
         checked={completed}
         onChange={updateTasks}
       />
-      <label htmlFor={taskId}>{label}</label>
+      <label htmlFor={taskId}>{label} {getCompletionDate()}</label>
     </div>
   );
 }

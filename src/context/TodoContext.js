@@ -9,8 +9,8 @@ const DEFAULT_TASKS = [
   {
     id: 2,
     label: 'Dormir la siesta',
-    completed: false,
-    completion_date: null
+    completed: true,
+    completion_date: 'Mon Jun 7 2021 18: 14: 28 GMT + 0200(Central European Summer Time)'
   },
   {
     id: 3,
