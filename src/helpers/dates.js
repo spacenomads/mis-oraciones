@@ -1,6 +1,8 @@
+const DAYS_LIMIT = 5;
 function getDaysAgo(taskDate) {
   const date = new Date(taskDate);
   const formattedDate = date.toISOString().split('T')[0];
+  const localFormattedDate = formattedDate.split('-').reverse().join('-');
 
   const today = new Date();
   const completion_date = new Date(formattedDate);
@@ -11,7 +13,7 @@ function getDaysAgo(taskDate) {
   if (days === 1) response = 'Ayer';
   if (days > 1) response = `Hace ${days} días`;
 
-  return response;
+  return days > DAYS_LIMIT ? localFormattedDate : response;
 }
 
 
