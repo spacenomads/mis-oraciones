@@ -21,6 +21,7 @@ function Todo(props) {
         completed: currentTaskCompleted,
         completion_date: currentTaskCompletionDate
       }
+      localStorage.setItem('oraciones', JSON.stringify(newTasks));
       return newTasks
     });
   }
