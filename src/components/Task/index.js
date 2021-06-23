@@ -4,7 +4,7 @@ import { getDaysAgo } from "../../helpers/dates";
 import './index.scss';
 
 function Task(props) {
-  const { saveTasks } = useContext(TasksContext);
+  const { saveList } = useContext(TasksContext);
   const { label, taskId, id, completed, completionDate} = props;
 
   const updateTasks = event => {
@@ -13,16 +13,16 @@ function Task(props) {
     const currentTaskCompletionDate = currentTaskCompleted ? new Date() : null;
     const currentTaskId = parseInt(field.dataset.id);
 
-    saveTasks(prevTasks => {
-      const newTasks = [...prevTasks];
-      const index = newTasks.findIndex(item => item.id === currentTaskId);
-      newTasks[index] = {
-        ...newTasks[index],
+    saveList(prevList => {
+      const newList = [...prevList];
+      const index = newList.findIndex(item => item.id === currentTaskId);
+      newList[index] = {
+        ...newList[index],
         completed: currentTaskCompleted,
         completion_date: currentTaskCompletionDate
       }
-      localStorage.setItem('oraciones', JSON.stringify(newTasks));
-      return newTasks
+      localStorage.setItem('oraciones', JSON.stringify(newList));
+      return newList
     });
   }
 

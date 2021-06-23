@@ -9,7 +9,7 @@ const DEFAULT_TASK = {
   completion_date: null
 };
 function NewTask() {
-  const { tasks, saveTasks } = useContext(TasksContext);
+  const { list, saveList } = useContext(TasksContext);
   const [modalVisibility, setModalVisibility] = useState(false);
   const [newTask, setNewTask] = useState(DEFAULT_TASK);
 
@@ -21,17 +21,17 @@ function NewTask() {
   const saveNewTask = event => {
     const task = event.target.value;
     setNewTask(prevTask => {
-      return { ...prevTask, label: task, id: tasks.length + 1 };
+      return { ...prevTask, label: task, id: list.length + 1 };
     });
   };
 
   const addNewTask = event => {
     event.preventDefault();
     if (newTask.label) {
-      saveTasks(prevTasks => {
-        const newTasks = [...prevTasks, newTask];
-        localStorage.setItem('oraciones', JSON.stringify(newTasks));
-        return newTasks;
+      saveList(prevList => {
+        const newList = [...prevList, newTask];
+        localStorage.setItem('oraciones', JSON.stringify(newList));
+        return newList;
       });
       setModalVisibility(false);
     }

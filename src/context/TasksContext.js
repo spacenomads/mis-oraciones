@@ -1,12 +1,12 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState } from "react";
 const DEFAULT_TASKS = []; 
 
 const TasksContext = createContext();
 
 function TasksContextProvider({children}) {
-  const [tasks, saveTasks] = useState(JSON.parse(localStorage.getItem('oraciones')) || DEFAULT_TASKS);
+  const [list, saveList] = useState(JSON.parse(localStorage.getItem('oraciones')) || DEFAULT_TASKS);
   return (
-    <TasksContext.Provider value={{tasks, saveTasks}}>
+    <TasksContext.Provider value={{list, saveList}}>
       {children}
     </TasksContext.Provider>
   );

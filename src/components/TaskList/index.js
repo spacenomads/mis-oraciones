@@ -5,7 +5,7 @@ import { TasksContext } from '../../context/TasksContext';
 
 
 function TaskList() {
-  const { tasks } = useContext(TasksContext);
+  const { list } = useContext(TasksContext);
   const createTasks = todo => {
     const { id, label, completed, completion_date} = todo;
     const taskId = `task-${id}`;
@@ -26,7 +26,15 @@ function TaskList() {
   return (
     <div>
       <ul className="app__todos">
-        {tasks.map(createTasks)}
+        {list
+          .sort(a => {
+            if (!a.completed) {
+              return -1;
+            } else {
+              return 1;
+            }
+          })
+          .map(createTasks)}
       </ul>
     </div>
   );
