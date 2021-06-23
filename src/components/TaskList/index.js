@@ -1,18 +1,18 @@
 import { useContext } from 'react';
-import Todo from '../Todo';
-import { TodoContext } from '../../context/TodoContext';
+import Task from '../Task';
+import { TasksContext } from '../../context/TasksContext';
 
 
 
-function TodoList() {
-  const { tasks } = useContext(TodoContext);
+function TaskList() {
+  const { tasks } = useContext(TasksContext);
   const createTasks = todo => {
     const { id, label, completed, completion_date} = todo;
     const taskId = `task-${id}`;
 
     return (
       <li className="app__todo" key={taskId}>
-        <Todo
+        <Task
           label={label}
           id={id}
           taskId={taskId}
@@ -32,4 +32,4 @@ function TodoList() {
   );
 }
 
-export default TodoList;
+export default TaskList;

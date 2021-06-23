@@ -1,10 +1,10 @@
 import { useContext } from "react";
-import { TodoContext } from "../../context/TodoContext";
+import { TasksContext } from "../../context/TasksContext";
 import { getDaysAgo } from "../../helpers/dates";
 import './index.scss';
 
-function Todo(props) {
-  const {saveTasks} = useContext(TodoContext);
+function Task(props) {
+  const { saveTasks } = useContext(TasksContext);
   const { label, taskId, id, completed, completionDate} = props;
 
   const updateTasks = event => {
@@ -46,4 +46,4 @@ function Todo(props) {
   );
 }
 
-export default Todo;
+export default Task;

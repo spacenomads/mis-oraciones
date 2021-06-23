@@ -1,18 +1,18 @@
 import { createContext, useState, useEffect } from "react";
 const DEFAULT_TASKS = []; 
 
-const TodoContext = createContext();
+const TasksContext = createContext();
 
-function TodoContextProvider({children}) {
+function TasksContextProvider({children}) {
   const [tasks, saveTasks] = useState(JSON.parse(localStorage.getItem('oraciones')) || DEFAULT_TASKS);
   return (
-    <TodoContext.Provider value={{tasks, saveTasks}}>
+    <TasksContext.Provider value={{tasks, saveTasks}}>
       {children}
-    </TodoContext.Provider>
+    </TasksContext.Provider>
   );
 }
 
 export {
-  TodoContext,
-  TodoContextProvider
+  TasksContext,
+  TasksContextProvider
 };

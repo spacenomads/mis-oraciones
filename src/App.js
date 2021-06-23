@@ -1,14 +1,14 @@
-import TodoList from './components/TodoList';
+import TaskList from './components/TaskList';
 import NewTask from './components/NewTask';
-import { TodoContextProvider } from './context/TodoContext';
+import { TasksContextProvider } from './context/TasksContext';
 function App() {
   return (
-    <TodoContextProvider>
+    <TasksContextProvider>
       <div className="app">
-        <TodoList />
+        <TaskList />
         <NewTask />
       </div>
-    </TodoContextProvider>
+    </TasksContextProvider>
   );
 }
 

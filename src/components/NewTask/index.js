@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { TodoContext } from "../../context/TodoContext";
+import { TasksContext } from "../../context/TasksContext";
 import './index.scss';
 
 const DEFAULT_TASK = {
@@ -9,7 +9,7 @@ const DEFAULT_TASK = {
   completion_date: null
 };
 function NewTask() {
-  const {tasks, saveTasks} = useContext(TodoContext);
+  const { tasks, saveTasks } = useContext(TasksContext);
   const [modalVisibility, setModalVisibility] = useState(false);
   const [newTask, setNewTask] = useState(DEFAULT_TASK);
 
