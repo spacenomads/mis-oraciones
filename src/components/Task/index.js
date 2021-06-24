@@ -41,7 +41,7 @@ function Task(props) {
         checked={completed}
         onChange={updateTasks}
       />
-      <label htmlFor={taskId}>{label} {getCompletionDate()}</label>
+      <label htmlFor={taskId}>({id}){label} {getCompletionDate()}</label>
     </div>
   );
 }

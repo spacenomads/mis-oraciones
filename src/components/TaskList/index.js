@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import Task from '../Task';
 import { TasksContext } from '../../context/TasksContext';
+import { sortByCompletionDate, sortByCompletedTask } from '../../helpers/sorts';
 
 
 
@@ -27,13 +28,9 @@ function TaskList() {
     <div>
       <ul className="app__todos">
         {list
-          .sort(a => {
-            if (!a.completed) {
-              return -1;
-            } else {
-              return 1;
-            }
-          })
+          .sort((a,b)=>a.id > b.id)
+          .sort(sortByCompletionDate)
+          .sort(sortByCompletedTask)
           .map(createTasks)}
       </ul>
     </div>
