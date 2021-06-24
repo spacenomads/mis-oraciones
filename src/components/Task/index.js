@@ -30,6 +30,19 @@ function Task(props) {
     return completed ? `@${getDaysAgo(completionDate)}`:'';
   }
 
+  const deleteTask = event => {
+    const btn = event.target;
+    const currentTaskId = parseInt(btn.dataset.id);
+
+    saveList(prevList => {
+      const newList = [...prevList];
+      const index = newList.findIndex(item => item.id === currentTaskId);
+      index !== -1 && newList.splice(index, 1);
+      localStorage.setItem('oraciones', JSON.stringify(newList));
+      return newList
+    });
+  };
+
   return (
     <div className={`task ${completed ? 'task--completed':''}`}>
       <input
@@ -42,6 +55,7 @@ function Task(props) {
         onChange={updateTasks}
       />
       <label htmlFor={taskId}>({id}){label} {getCompletionDate()}</label>
+      <button onClick={deleteTask} data-id={id} type="button">Borrar tarea</button>
     </div>
   );
 }

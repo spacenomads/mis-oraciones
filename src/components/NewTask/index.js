@@ -1,5 +1,6 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useRef, useEffect } from "react";
 import { TasksContext } from "../../context/TasksContext";
+import { getNextId } from "../../helpers/id";
 import './index.scss';
 
 const DEFAULT_TASK = {
@@ -12,6 +13,11 @@ function NewTask() {
   const { list, saveList } = useContext(TasksContext);
   const [modalVisibility, setModalVisibility] = useState(false);
   const [newTask, setNewTask] = useState(DEFAULT_TASK);
+  const newTaskField = useRef(null);
+
+  useEffect(() => {
+    modalVisibility && newTaskField.current.focus();
+  }, [modalVisibility])
 
   const showModal = () => {
     setModalVisibility(true);
@@ -21,13 +27,13 @@ function NewTask() {
   const saveNewTask = event => {
     const task = event.target.value;
     setNewTask(prevTask => {
-      return { ...prevTask, label: task, id: list.length + 1 };
+      return { ...prevTask, label: task, id: getNextId(list) + 1 };
     });
   };
 
   const addNewTask = event => {
     event.preventDefault();
-    if (newTask.label) {
+    if (newTask.label.trim()) {
       saveList(prevList => {
         const newList = [...prevList, newTask];
         localStorage.setItem('oraciones', JSON.stringify(newList));
@@ -45,7 +51,15 @@ function NewTask() {
         <form className="app__form" onSubmit={addNewTask}>
           <div className="app__form-row">
             <label htmlFor="newTask" className="app__form-label">Qué queremos hacer?</label>
-            <input name="newTask" id="newTask" type="text" className="app__form-field" value={newTask.label} onChange={saveNewTask} />
+            <input 
+              name="newTask" 
+              id="newTask" 
+              type="text" 
+              className="app__form-field" 
+              value={newTask.label} 
+              onChange={saveNewTask}
+              ref={newTaskField}
+            />
           </div>
           <div className="app__form-row">
             <button type="submit" className="app__submit-new-task">Añadir</button>
